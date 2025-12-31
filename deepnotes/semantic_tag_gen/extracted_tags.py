@@ -19,6 +19,13 @@ class TagList:
             return False
         return sorted(self.tags) == sorted(other.tags)
 
+    def intersect(self, other: TagList) -> TagList:
+        self_tag_set = set(self.tags)
+        other_tag_set = set(other.tags)
+        intersected = self_tag_set.intersection(other_tag_set)
+        return self.__class__(tags=intersected)
+    
+
 @dataclass
 class CleanedTagList(TagList):
     pass
