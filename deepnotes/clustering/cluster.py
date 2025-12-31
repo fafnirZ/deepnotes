@@ -13,6 +13,10 @@ class Cluster:
     def add_node(self, node: FileNode) -> Self:
         assert isinstance(node, FileNode)
         file_path = node.file_path
+
+        if file_path in self.nodes:
+            raise RuntimeError("Duplicative FileNode provided.")
+
         self.nodes[file_path] = ClusterNode(
             file_node=node,
             connections=[],
