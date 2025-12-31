@@ -11,3 +11,8 @@ class ClusterNode:
     file_node: FileNode
 
     connections: list[ClusterNode] = field(default_factory=lambda: [])
+
+    def __eq__(self, other: ClusterNode):
+        if not isinstance(other, ClusterNode):
+            return False
+        return self.file_node == other.file_node

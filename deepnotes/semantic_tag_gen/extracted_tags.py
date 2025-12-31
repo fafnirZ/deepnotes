@@ -14,6 +14,11 @@ class TagList:
         _tags = list(map(lambda x: x.lower(), _tags))
         return CleanedTagList(_tags)
 
+    def __eq__(self, other: TagList):
+        if not isinstance(other, TagList):
+            return False
+        return sorted(self.tags) == sorted(other.tags)
+
 @dataclass
 class CleanedTagList(TagList):
     pass

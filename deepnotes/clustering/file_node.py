@@ -1,4 +1,4 @@
-
+from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,5 +14,12 @@ class FileNode:
         assert isinstance(self.file_path, Path)
         assert self.file_path.is_file()
         assert isinstance(self.tags, TagList)
-    
-    
+
+    def __eq__(self, other: FileNode) -> bool:
+        if not isinstance(other, FileNode):
+            return False
+        
+        return (
+            self.file_path == other.file_path
+            and self.tags == other.tags
+        )

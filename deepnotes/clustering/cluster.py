@@ -42,6 +42,7 @@ class Cluster:
     def calculate(self):
         if self._lock:
             raise RuntimeError("Cannot recalculate on a locked cluster.")
+
         
 
 
