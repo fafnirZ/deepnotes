@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from enum import Enum, auto
 from pathlib import Path
 
-from deepnotes.extracted_tags import TagList
+from deepnotes.semantic_tag_gen.extracted_tags import TagList
 
 
 class SemanticAgent(ABC):
