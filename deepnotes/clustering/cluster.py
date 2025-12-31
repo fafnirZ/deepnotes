@@ -6,9 +6,16 @@ from typing import Self
 from deepnotes.clustering.cluster_node import ClusterNode
 from deepnotes.clustering.file_node import FileNode
 
+type NodeId = Path
+
+# TODO implement connection
+
 @dataclass
 class Cluster:
-    nodes: dict[Path, ClusterNode] = field(default_factory=lambda: dict())
+    nodes: dict[NodeId, ClusterNode] = field(default_factory=lambda: dict())
+    connections: dict[NodeId, Connection]
+
+    # aux
     lock_: bool = field(default=False)
 
     def add_node(self, node: FileNode) -> Self:
