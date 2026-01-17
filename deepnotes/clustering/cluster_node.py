@@ -1,5 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
+from typing import Any
 from deepnotes.clustering.file_node import FileNode
 
 @dataclass
@@ -10,9 +11,8 @@ class ClusterNode:
     """
     file_node: FileNode
 
-    connections: list[ClusterNode] = field(default_factory=lambda: [])
 
-    def __eq__(self, other: ClusterNode):
+    def __eq__(self, other: Any):
         if not isinstance(other, ClusterNode):
             return False
         return self.file_node == other.file_node

@@ -4,16 +4,17 @@ from pathlib import Path
 from typing import Self
 
 from deepnotes.clustering.cluster_node import ClusterNode
-from deepnotes.clustering.file_node import FileNode
+from deepnotes.clustering.connection import Connection
+from deepnotes.clustering.file_node import FileNode, NodeId
 
-type NodeId = Path
+
 
 # TODO implement connection
 
 @dataclass
 class Cluster:
     nodes: dict[NodeId, ClusterNode] = field(default_factory=lambda: dict())
-    connections: dict[NodeId, Connection]
+    connections: dict[NodeId, Connection] = field(default_factory=lambda: dict())
 
     # aux
     lock_: bool = field(default=False)
@@ -30,7 +31,6 @@ class Cluster:
 
         self.nodes[file_path] = ClusterNode(
             file_node=node,
-            connections=[],
         )
         return self
 
@@ -42,8 +42,8 @@ class Cluster:
 
     def deep_clone(self) -> Cluster:
         inst = Cluster()
-        for node in self.nodes:
-            inst.add_node(node)
+        for id, node in self.nodes.items():
+            inst.add_node(node.file_node)
         return inst
     
     def calculate(self):
