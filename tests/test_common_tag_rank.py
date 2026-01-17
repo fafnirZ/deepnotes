@@ -1,6 +1,8 @@
 
 
 from pathlib import Path
+from deepnotes.algorithm.common_tag_rank import rank
+from deepnotes.clustering.cluster import Cluster
 from deepnotes.clustering.file_node import FileNode
 from deepnotes.semantic_tag_gen.extracted_tags import TagList
 
@@ -24,7 +26,18 @@ def test_simple(mocker):
         FileNode(file_path=Path(node[0]), tags=TagList(node[1]))
         for node in file_nodes
     ]
-    print(fnodes)
+
+    # add nodes to cluster
+    cluster = Cluster()
+    for fnode in fnodes:
+        cluster.add_node(fnode)
+    cluster.lock()
+    
+    # run algo
+    rank(cluster)
+
+    # print cluster
+    print(cluster)
 
     assert False
     

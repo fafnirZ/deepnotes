@@ -49,8 +49,11 @@ class Cluster:
     def lock(self):
         self._lock = True
     
-    def is_locked(self)->bool:
-        return self._lock
+    def is_locked(self) -> bool:
+        if hasattr(self, "_lock"):
+            return self._lock
+        else:
+            return False
 
     def deep_clone(self) -> Cluster:
         inst = Cluster()
