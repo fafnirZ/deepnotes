@@ -11,7 +11,6 @@ class ClusterNode:
     """
     file_node: FileNode
 
-
     def __eq__(self, other: Any):
         if not isinstance(other, ClusterNode):
             return False
