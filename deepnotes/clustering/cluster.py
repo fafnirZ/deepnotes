@@ -14,7 +14,7 @@ from deepnotes.clustering.file_node import FileNode, NodeId
 @dataclass
 class Cluster:
     nodes: dict[NodeId, ClusterNode] = field(default_factory=lambda: dict())
-    connections: dict[NodeId, Connection] = field(default_factory=lambda: dict())
+    connections: dict[NodeId, list[Connection]] = field(default_factory=lambda: dict())
 
     # aux
     lock_: bool = field(default=False)
@@ -32,6 +32,16 @@ class Cluster:
         self.nodes[file_path] = ClusterNode(
             file_node=node,
         )
+        return self
+
+    def add_connection(self, src: NodeId, dest: NodeId, weight: float):
+        assert isinstance(src, NodeId)
+        assert isinstance(src, NodeId)
+        assert isinstance(src, (float, int))
+        assert src in self.nodes.keys(), f"src: {src} not in cluster's registered nodes"
+        assert dest in self.nodes.keys(), f"dest {dest} not in cluster's registered nodes"
+        conn = Connection(src=src, dest=dest, weight=weight)
+        self.connections[src].append(conn)
         return self
 
 
