@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from deepnotes.extracted_tags import CleanedTagList, TagList
+from deepnotes.semantic_tag_gen.extracted_tags import CleanedTagList, TagList
 
 type NodeId = Path
 

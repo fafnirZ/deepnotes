@@ -9,7 +9,6 @@ from deepnotes.clustering.file_node import FileNode, NodeId
 
 
 
-# TODO implement connection
 
 @dataclass
 class Cluster:
@@ -49,6 +48,9 @@ class Cluster:
     # and you must generate a new cluster.
     def lock(self):
         self._lock = True
+    
+    def is_locked(self)->bool:
+        return self._lock
 
     def deep_clone(self) -> Cluster:
         inst = Cluster()
