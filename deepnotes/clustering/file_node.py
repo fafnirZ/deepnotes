@@ -5,7 +5,7 @@ from typing import Any
 
 from deepnotes.semantic_tag_gen.extracted_tags import CleanedTagList, TagList
 
-type NodeId = Path
+NodeId = Path
 
 @dataclass
 class FileNode:

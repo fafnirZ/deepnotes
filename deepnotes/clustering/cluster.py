@@ -35,11 +35,14 @@ class Cluster:
 
     def add_connection(self, src: NodeId, dest: NodeId, weight: float):
         assert isinstance(src, NodeId)
-        assert isinstance(src, NodeId)
-        assert isinstance(src, (float, int))
+        assert isinstance(dest, NodeId)
+        assert isinstance(weight, (float, int))
         assert src in self.nodes.keys(), f"src: {src} not in cluster's registered nodes"
         assert dest in self.nodes.keys(), f"dest {dest} not in cluster's registered nodes"
         conn = Connection(src=src, dest=dest, weight=weight)
+
+        if src not in self.connections:
+            self.connections[src] = []
         self.connections[src].append(conn)
         return self
 
